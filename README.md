@@ -21,13 +21,13 @@ This project contains a Python script (`doer.py`) that automatically generates a
 
 ## Usage
 
-To generate the presentation, simply run the `doer.py` script from your terminal:
+To generate the presentation, simply run the `doer` command from your terminal:
 
 ```bash
-python doer.py
+doer ppt
 ```
 
-This will create a PowerPoint file named `great1.pptx` in the same directory.
+This will create a PowerPoint file named `project_proposal.pptx` in the same directory and automatically open it.
 
 ## Customization
 
@@ -35,4 +35,21 @@ You can customize the presentation by modifying the `doer.py` script:
 
 *   **Content:** Edit the text content within the slide creation functions (e.g., `create_title_slide`, `create_executive_summary`, etc.).
 *   **Design:** Adjust colors, fonts, and layouts defined in the `ColorPalette` class, font variables, and helper functions like `add_shape`, `add_background`, `apply_title_style`, `apply_body_style`.
-*   **Filename:** Change the output filename in the `create_presentation` function's `prs.save()` line. 
+*   **Filename:** Change the output filename in the `create_presentation` function's `prs.save()` line.
+
+## System-wide Command Installation
+
+To use the "doer" script as a system-wide command, copy it to a directory in your PATH (for example, /usr/local/bin) using the following commands:
+
+```bash
+sudo cp doer /usr/local/bin/doer
+sudo chmod +x /usr/local/bin/doer
+```
+
+After installation, you can generate the presentation by simply running:
+
+```bash
+doer ppt
+```
+
+This command will create the presentation file "project_proposal.pptx" and automatically open it. 
