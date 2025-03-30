@@ -86,3 +86,7 @@
 - プロジェクトの設計はシンプルで拡張性があり、企業またはプロジェクトの要件に合わせた提案書生成が容易に行えるようになっています.
 
 Happy Proposal Generating!
+
+## Demo
+
+以下のデモ動画で、システムの操作方法を確認できます: [YouTube Demo](https://www.youtube.com/watch?v=neGcyD3vP_g)
