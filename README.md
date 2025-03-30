@@ -1,55 +1,88 @@
-# Python PowerPoint Presentation Generator
+# Python Proposal Generator
 
-This project contains a Python script (`doer.py`) that automatically generates a PowerPoint presentation (`.pptx`) file based on predefined content and a specific design theme. The current version generates a sophisticated project proposal presentation with a minimalist black and white design using the 'Lato' font.
+このプロジェクトは、モダンな提案書を自動生成するシンプルな Python スクリプト群を提供します。このプロジェクトは PowerPoint および Word の形式で提案書を生成することができ、コマンドラインユーティリティ "doer" を利用して実行できます。
 
-## Requirements
+## 概要と目的
 
-*   Python 3.x
-*   `python-pptx` library
+- 本プロジェクトは、ビジネス提案書を自動生成するために設計されています。
+- 高品質なデザインの PowerPoint 提案書と、明快なレイアウトの Word 提案書を生成することが可能です。
+- シンプルなコマンドラインインターフェースにより、「doer」コマンドを実行するだけで、各形式の提案書が生成されます。
 
-## Installation
+## 構成
 
-1.  **Clone the repository (optional):**
-    ```bash
-    git clone <repository_url>
-    cd <repository_directory>
-    ```
-2.  **Install the required library:**
-    ```bash
-    pip install python-pptx
-    ```
+- **doer**: コマンドラインユーティリティ。引数に応じて、PowerPoint 版は setup.py を経由して ppt.py の処理を、Word 版は word.py を直接実行します。
+- **setup.py**: PowerPoint 版提案書生成処理のエントリーポイント。ppt.py をインポートして直接 ppt.create_presentation() を呼び出します。
+- **ppt.py**: 高品質な PowerPoint 提案書（.pptx）の生成ロジックを持ち、プレゼンテーションのデザインやレイアウト、スライド構成が定義されています。
+- **word.py**: Word 形式の提案書（.docx）生成スクリプト。各段落に適切な行間とテーブル配置が施され、見やすい提案書を生成します。
 
-## Usage
+※ main.py は存在せず、代わりに setup.py をエントリーポイントとして利用しています。
 
-To generate the presentation, simply run the `doer` command from your terminal:
+## 動作環境
 
-```bash
-doer ppt
-```
+- Python 3.x
+- 必要ライブラリ:
+  - python-pptx
+  - python-docx
 
-This will create a PowerPoint file named `project_proposal.pptx` in the same directory and automatically open it.
+## インストール
 
-## Customization
+1. リポジトリをクローンします:
+   ```bash
+   git clone <repository_url>
+   cd <repository_directory>
+   ```
+2. 必要ライブラリのインストール:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-You can customize the presentation by modifying the `doer.py` script:
+## 起動方法
 
-*   **Content:** Edit the text content within the slide creation functions (e.g., `create_title_slide`, `create_executive_summary`, etc.).
-*   **Design:** Adjust colors, fonts, and layouts defined in the `ColorPalette` class, font variables, and helper functions like `add_shape`, `add_background`, `apply_title_style`, `apply_body_style`.
-*   **Filename:** Change the output filename in the `create_presentation` function's `prs.save()` line.
+### システム全体のコマンド「doer」の設定
+1. doer をシステムの実行可能ファイルとして配置します:
+   ```bash
+   sudo cp doer /usr/local/bin/doer
+   sudo chmod +x /usr/local/bin/doer
+   ```
 
-## System-wide Command Installation
+### 提案書の生成
 
-To use the "doer" script as a system-wide command, copy it to a directory in your PATH (for example, /usr/local/bin) using the following commands:
+- **PowerPoint 版の場合**:
+   ```bash
+   doer ppt
+   ```
+   これにより、PowerPoint 形式の提案書（project_proposal.pptx）が生成され、自動的に開かれます。
 
-```bash
-sudo cp doer /usr/local/bin/doer
-sudo chmod +x /usr/local/bin/doer
-```
+- **Word 版の場合**:
+   ```bash
+   doer word
+   ```
+   これにより、Word 形式の提案書（project_proposal.docx）が生成され、自動的に開かれます。
 
-After installation, you can generate the presentation by simply running:
+## 機能要件仕様
 
-```bash
-doer ppt
-```
+- **PowerPoint 提案書**:
+  - **スライド構成**: タイトル、エグゼクティブサマリー、現状分析、提案内容、実施スケジュール、チーム構成、リスク管理、予算計画、成功基準、結論
+  - **デザイン・レイアウト**:
+    - 白と黒を基調としたシンプルなカラーパレット
+    - 「Lato」フォントおよび適切なフォントサイズ
+    - 自動オープン機能（生成後、出力ファイルが自動的に開かれる）
 
-This command will create the presentation file "project_proposal.pptx" and automatically open it. 
+- **Word 提案書**:
+  - **段落設定**: 各段落に対して適切な余白（行間）の設定が施され、各項目が明確に区切られるように設計
+  - **テーブルレイアウト**: 予算計画や概要情報を含むテーブルが、見やすいレイアウトで作成される
+  - **自動オープン機能**: 生成後、出力ファイルが自動的に開かれる
+
+## カスタマイズ
+
+- **ppt.py**: 提案書の内容、カラーパレット、フォント、レイアウト、スライド構成を変更可能
+- **word.py**: 各段落の行間、テーブルレイアウト、テキストの配置などを編集可能
+- **setup.py**: PowerPoint 提案書生成のエントリーポイントとしての処理を含む（ppt.py の呼び出し部分をカスタマイズ可能）
+- **doer**: コマンド引数（ppt または word）に応じて、適切なスクリプトを実行する仕組みで、システム全体のコマンドとして使用できる
+
+## その他の情報
+
+- 各ファイルには十分なコメントが記載され、カスタマイズの際に参考となる設計思想やコードの詳細が説明されています。
+- プロジェクトの設計はシンプルで拡張性があり、企業またはプロジェクトの要件に合わせた提案書生成が容易に行えるようになっています.
+
+Happy Proposal Generating!
